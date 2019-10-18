@@ -1,5 +1,6 @@
 package com.example.certi_gen.Activities;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -26,10 +27,29 @@ public class FoldersDetailActivity extends AppCompatActivity {
     com.example.certi_gen.Services.DatabaseHelperFolder databaseHelperFolder;
 
     ImageView iv;
+    static ImageView certificate_image;
+    static int b=0;
+    public static void setImage(Bitmap bitmap){
+        certificate_image.setImageBitmap(bitmap);
+        certificate_image.setVisibility(View.VISIBLE);
+        b=1;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(b==1){
+            b=0;
+            certificate_image.setVisibility(View.GONE);
+        }
+        else
+        super.onBackPressed();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_folder_detail);
+        certificate_image = findViewById(R.id.image_certificate);
                 iv = findViewById(R.id.folder_creation_info);
         iv.setOnClickListener(new View.OnClickListener() {
             @Override
